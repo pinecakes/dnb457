@@ -1,5 +1,5 @@
 # dnb457
-Dots and Boxes, a two player CLI game
+Dots and Boxes, a two player CLI game!
 
 ### Rules:
 - Both players will be presented with a grid of dots, 6 across and 5 down. Each column will be labeled A-F, and each row 1-5.
