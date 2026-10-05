@@ -2,7 +2,6 @@
 ---
 config:
   look: classic
-  theme: forest
   layout: elk
 ---
 flowchart TB
