@@ -2,7 +2,7 @@
 ---
 config:
   look: classic
-  theme: redux-dark
+  theme: forest
   layout: elk
 ---
 flowchart TB
@@ -18,3 +18,5 @@ flowchart TB
     F -- broadcast final results --> G["RESTART"]
     G -- Reset board and roles --> B
 ```
+
+In case Mermaid renders it unreadably for some reason, be sure to check out the PNG of the better layout.

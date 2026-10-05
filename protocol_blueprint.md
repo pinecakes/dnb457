@@ -5,7 +5,7 @@
 All DNBP packets must include the following fields:
 
 | Field | JSON type |  Rules |
-|---|---|---:|
+|---|---|
 | `protocol_version` | string |  Exactly `"1.0"` |
 | `msg_type` | string |  One of the defined message types |
 | `msg_id` | string | Unique message identifier |
@@ -19,9 +19,9 @@ All DNBP packets must include the following fields:
 **Direction:** Client → Server  
 **Purpose:** Request to join the game.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `player_name` | string | Yes | Display name requested by the client |
+| Field | JSON type | Description |
+|---|---|---|
+| `player_name` | string | Display name requested by the client |
 
 *Example:*
 ```json
@@ -40,11 +40,11 @@ All DNBP packets must include the following fields:
 **Direction:** Server → Client  
 **Purpose:** Notify the first player that the server is waiting for Player 2.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `player_id` | integer | Yes | Assigned player ID; normally `1` |
-| `player_name` | string | Yes | Name accepted for the connected player |
-| `notification` | string | Yes | A welcome string addressed to Player 1 |
+| Field | JSON type | Description |
+|---|---|---|
+| `player_id` | integer | Assigned player ID; normally `1` |
+| `player_name` | string | Name accepted for the connected player |
+| `notification` | string | A welcome string addressed to Player 1 |
 
 *Example*
 ```json
@@ -66,14 +66,14 @@ All DNBP packets must include the following fields:
 **Direction:** Server → Clients  
 **Purpose:** Start the game and broadcast the initial game state.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `players` | array | Yes | Players participating in the game |
-| `players[].player_id` | integer | Yes | Server-assigned ID, either `1` or `2` |
-| `players[].player_name` | string | Yes | Player display name |
-| `board` | object | Yes | Empty initialized board |
-| `turn` | integer | Yes | Current turn number; starts at `1` |
-| `current_player_id` | integer | Yes | Player whose turn it is |
+| Field | JSON type | Description |
+|---|---|---|
+| `players` | array | Players participating in the game |
+| `players[].player_id` | integer | Server-assigned ID, either `1` or `2` |
+| `players[].player_name` | string | Player display name |
+| `board` | object | Empty initialized board |
+| `turn` | integer | Current turn number; starts at `1` |
+| `current_player_id` | integer | Player whose turn it is |
 
 *Example*
 ```json
@@ -122,11 +122,11 @@ All DNBP packets must include the following fields:
 **Direction:** Client → Server  
 **Purpose:** Submit one line drawn by a player.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `player_id` | integer | Yes | Player making the move; must be `1` or `2` |
-| `start` | array | Yes | First coordinate pair `[row, column]` |
-| `end` | array | Yes | Second coordinate pair `[row, column]` |
+| Field | JSON type | Description |
+|---|---|---|
+| `player_id` | integer | Player making the move; must be `1` or `2` |
+| `start` | array | First coordinate pair `[row, column]` |
+| `end` | array | Second coordinate pair `[row, column]` |
 
 The coordinates must:
 - Contain exactly two integers.
@@ -154,14 +154,14 @@ The coordinates must:
 **Direction:** Server → Clients  
 **Purpose:** Broadcast the updated board after a valid move.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `board` | object | Yes | Updated board state |
-| `scores` | object | Yes | Current scores |
-| `scores.player_1` | integer | Yes | Player 1 score |
-| `scores.player_2` | integer | Yes | Player 2 score |
-| `turn` | integer | Yes | Current turn number |
-| `current_player_id` | integer | Yes | Player whose turn is next |
+| Field | JSON type | Description |
+|---|---|---|
+| `board` | object | Updated board state |
+| `scores` | object | Current scores |
+| `scores.player_1` | integer | Player 1 score |
+| `scores.player_2` | integer | Player 2 score |
+| `turn` | integer | Current turn number |
+| `current_player_id` | integer | Player whose turn is next |
 
 *Example*
 ```json
@@ -204,9 +204,9 @@ The coordinates must:
 **Direction:** Client → Server  
 **Purpose:** Request the current board and turn state (response is `UPDATE_BOARD`).
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `player_id` | integer | Yes | Requesting player; must be `1` or `2` |
+| Field | JSON type | Description |
+|---|---|---|
+| `player_id` | integer | Requesting player; must be `1` or `2` |
 
 *Example*
 ```json
@@ -226,15 +226,15 @@ The coordinates must:
 **Direction:** Server → Clients  
 **Purpose:** Notify clients that the game has ended.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `reason` | string | Yes | One of `"VICTORY"`, `"DRAW"`, or `"FORFEIT"` |
-| `winner_id` | integer or null | Yes | Winning player, or `null` for a draw |
-| `scores` | object | Yes | Final scores |
-| `scores.player_1` | integer | Yes | Final Player 1 score |
-| `scores.player_2` | integer | Yes | Final Player 2 score |
-| `board` | object | Yes | Final board state |
-| `turn` | integer | Yes | Final turn number |
+| Field | JSON type | Description |
+|---|---|---|
+| `reason` | string | One of `"VICTORY"`, `"DRAW"`, or `"FORFEIT"` |
+| `winner_id` | integer or null | Winning player, or `null` for a draw |
+| `scores` | object | Final scores |
+| `scores.player_1` | integer | Final Player 1 score |
+| `scores.player_2` | integer | Final Player 2 score |
+| `board` | object | Final board state |
+| `turn` | integer | Final turn number |
 
 *Example*
 ```json
@@ -278,10 +278,10 @@ The coordinates must:
 **Direction:** Server → Client  
 **Purpose:** Report a malformed packet or invalid move.
 
-| Field | JSON type | Required | Description |
-|---|---|---:|---|
-| `code` | string | Yes | Error code for identification |
-| `message` | string | Yes | User friendly explanation |
+| Field | JSON type | Description |
+|---|---|---|
+| `code` | string | Error code for identification |
+| `message` | string | User friendly explanation |
 
 *Example*
 ```json
