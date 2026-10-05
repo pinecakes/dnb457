@@ -67,7 +67,6 @@
 ---
 config:
   look: classic
-  theme: forest
   layout: dagre
 ---
 flowchart LR
