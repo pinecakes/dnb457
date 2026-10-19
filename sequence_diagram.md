@@ -9,7 +9,7 @@ sequenceDiagram
     note over P1, P2: Lobby complete — BEGIN broadcast to both clients
     note over SRV: current_player_id = 1, turn = 1
 
-    rect rgb(240, 248, 255)
+    rect rgb(83, 116, 145)
         note over P1, SRV: Player 1 submits first move (non-blocking read path)
         P1->>SRV: PLAYER_TURN {player_id:1, start:[0,0], end:[0,1]}
         SRV->>SEL: select() blocks until socket ready
@@ -19,7 +19,7 @@ sequenceDiagram
         SRV->>SRV: decode UTF-8, parse JSON, validate schema & protocol_version
     end
 
-    rect rgb(255, 250, 240)
+    rect rgb(126, 121, 72)
         note over SRV: Turn enforcement — single-threaded event loop
         SRV->>SRV: validate active player_id == 1?
         alt not player 1's turn, or invalid coordinates
@@ -38,7 +38,7 @@ sequenceDiagram
         end
     end
 
-    rect rgb(255, 245, 245)
+    rect rgb(150, 87, 87)
         note over P1, P2: Disconnect / forfeit branch
         P1->>SRV: close socket (orderly shutdown)
         SRV->>SEL: EVENT_READ on P1's connection
