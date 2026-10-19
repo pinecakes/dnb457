@@ -88,12 +88,12 @@ flowchart LR
 ## 3. Game Behavior & Server Concurrency Architecture (Sprint 2 Deliverable)
 
 ### 3.1 Server Concurrency Strategy
-- **Architecture Choice:** [Multi-Threading (`threading.Thread`) OR Non-blocking I/O multiplexing (`select.select` / `selectors`)]
-- **Synchronization Logic:** Explain how shared game state and client list are thread-safe (e.g. `threading.Lock`) to prevent race conditions during turn processing.
+- **Architecture Choice:** Non-blocking I/O multiplexing (`select.select` / `selectors`)
+- **Synchronization Logic:** Shared game state is thread-safe by using only a single thread with non-blocking event monitors and selectors to allow for serialization of events.
 
 ### 3.2 State & Score Synchronization Across Clients
-- **Turn Enforcement:** Detail how the server validates active player ID before processing moves and broadcasts updated turn notifications to all clients.
-- **Score & Board Synchronization:** Describe how state broadcasts keep client screens synchronized in real time.
+- **Turn Enforcement:** Once the BEGIN phase has initiated the server will maintain its own authoritative count of turn number, beginning at 1. Player 1 will be able to submit turns on odd numbered turns and player 2 on even numbered turns. Upon issuing new board state the server will include the current turn number and active player ID.
+- **Score & Board Synchronization:** Since the server is the only authoritative source of statefulness and uses event monitors, any changes to the state of the game by a client will be overwritten as they occur. For example, as Player 1 submits their turn, the server will validate the result of the submission and will only update both players of the new board state once it has been accepted and validated.
 
 ---
 
